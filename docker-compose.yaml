@@ -1,0 +1,36 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres-dev
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - ./infra/sql:/docker-entrypoint-initdb.d
+    ports:
+      - "5433:5432"
+    networks:
+      - app-network
+
+  node:
+    image: node:lts-slim
+    container_name: api-cursoslivres-senai
+    working_dir: /app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    command: >
+      bash -c "npm install && npm run start"
+    depends_on:
+      - postgres
+    ports:
+      - "4444:4444"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

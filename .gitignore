@@ -1,0 +1,8 @@
+# Ignorar diretórios de dependências
+node_modules/
+
+# Ignorar ficheiros de build
+dist/
+
+# Ignorar ficheiros de ambiente
+.env
