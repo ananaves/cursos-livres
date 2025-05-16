@@ -20,7 +20,7 @@ export class DataBaseModel {
         this._config = {
             user: process.env.DB_USER,
             host: process.env.DB_HOST,
-            database: process.env.DB_MANE,
+            database: process.env.DB_NOME,
             password: process.env.DB_PASSWORD,
             port: process.env.DB_PORT,
             mex: 10,
