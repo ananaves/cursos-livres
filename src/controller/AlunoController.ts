@@ -21,7 +21,6 @@ class AlunoController extends Aluno {
      */
 
     static async todos(req: Request, res: Response) {
-        console.log(`passei por aqui!!`)
         try {
             const listaDeAlunos = await Aluno.listarAlunos();
             res.status(200).json(listaDeAlunos);
