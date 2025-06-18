@@ -5,9 +5,7 @@ const database = new DataBaseModel().pool;
 
 //classe que representa um Aluno no sistema
 export class Aluno {
-    static setIdAluno(arg0: number) {
-        throw new Error("Method not implemented.");
-    }
+    
     private idAluno: number = 0;
     private nomeAluno: string;
     private sobrenomeAluno: string;
@@ -109,7 +107,6 @@ export class Aluno {
         try {
             // consulta no banco
             const querySelectAluno = `SELECT * FROM aluno;`;
-            console.log(querySelectAluno);
             //executa no banco
             const respostaBD = await database.query(querySelectAluno);
 
@@ -117,12 +114,12 @@ export class Aluno {
             respostaBD.rows.forEach((aluno: any) => {
                 //criando objeto aluno
                 let novoAluno = new Aluno(
-                    aluno.nomeAluno,
-                    aluno.sobrenomeAluno,
-                    aluno.dataNascimento,
-                    aluno.cpfAluno,
-                    aluno.emailAluno,
-                    aluno.celularAluno
+                    aluno.nome_aluno,
+                    aluno.sobrenome_aluno,
+                    aluno.data_nascimento,
+                    aluno.cpf_aluno,
+                    aluno.email_aluno,
+                    aluno.celular_aluno
                 );
                 // adicionando o ID ao obj
                 novoAluno.setIdAluno(aluno.id_aluno);
@@ -144,11 +141,11 @@ export class Aluno {
             //cria a consulta (query) para inserir o registro de um aluno nol banco
             const queryInsertAluno = `INSERT INTO Aluno (nome_aluno, sobrenome_aluno, data_nascimento, cpf_aluno, email_aluno, celular_aluno)
                                       VALUES (
-                                            '${aluno.getNomeAluno().toUpperCase()}'
-                                            '${aluno.getSobrenomeAluno().toUpperCase()}'
-                                            '${aluno.getDataNascimento()}'
-                                            '${aluno.getCpfAluno().toUpperCase()}'
-                                            '${aluno.getEmailAluno().toUpperCase()}'
+                                            '${aluno.getNomeAluno().toUpperCase()}',
+                                            '${aluno.getSobrenomeAluno().toUpperCase()}',
+                                            '${aluno.getDataNascimento()}',
+                                            '${aluno.getCpfAluno().toUpperCase()}',
+                                            '${aluno.getEmailAluno().toUpperCase()}',
                                             '${aluno.getCelularAluno()}'
                                             )
                                             RETURNING id_aluno;`;
